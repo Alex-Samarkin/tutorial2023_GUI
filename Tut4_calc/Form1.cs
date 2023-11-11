@@ -217,5 +217,86 @@ namespace Tut4_calc
         {
             XValue = 1.0/Math.PI;
         }
+
+        private void button50_Click(object sender, EventArgs e)
+        {
+            XValue = YValue* YValue + ZValue*ZValue;
+        }
+
+        public double ToRadians(double value)
+        {
+            return value * Math.PI / 180.0;
+        }
+
+        private void button51_Click(object sender, EventArgs e)
+        {
+            var t = comboBox1.Text;
+            // локальная версия преобразования строки в число
+            var value = this.ToDouble(t,0);
+            // результат в ComboBox
+            comboBox1.Text = value.ToString();
+            // deg -> rad
+            value = ToRadians(value);
+
+            XValue = Math.Sin(value);
+        }
+
+        private void button52_Click(object sender, EventArgs e)
+        {
+            var t = comboBox1.Text;
+            // локальная версия преобразования строки в число
+            var value = this.ToDouble(t, 0);
+            // результат в ComboBox
+            comboBox1.Text = value.ToString();
+            // deg -> rad
+            value = ToRadians(value);
+
+            XValue = Math.Cos(value);
+        }
+
+        private void button53_Click(object sender, EventArgs e)
+        {
+            var t = comboBox1.Text;
+            // локальная версия преобразования строки в число
+            var value = this.ToDouble(t, 0);
+            // результат в ComboBox
+            comboBox1.Text = value.ToString();
+            // deg -> rad
+            value = ToRadians(value);
+
+            XValue = Math.Tan(value);
+        }
+
+        private void button54_Click(object sender, EventArgs e)
+        {
+            // deg -> rad
+            XValue = XValue*Math.PI/180.0;
+        }
+
+        private void button55_Click(object sender, EventArgs e)
+        {
+            // rad -> deg
+            XValue = XValue * 180.0 / Math.PI;
+        }
+
+        // временное значение при выборе trackbar
+        private double _oldXValue = 0;
+        // при изменении trackbar
+        private void trackBar1_Enter(object sender, EventArgs e)
+        {
+            _oldXValue = XValue;
+        } 
+
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            var round = trackBar1.Value;
+            if(round == -1)
+            {
+                XValue = _oldXValue;
+                return;
+            }
+            XValue = Math.Round(_oldXValue,round);
+        }
     }
 }
